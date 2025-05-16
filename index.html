@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XSS Test Page</title>
+</head>
+<body>
+    <h2>XSS WAF Evasion Demo</h2>
+    <form method="GET">
+        <label for="input">Enter something:</label>
+        <input type="text" name="input" id="input">
+        <input type="submit" value="Submit">
+    </form>
+
+    <h3>Output:</h3>
+    <div>
+        <!-- Vulnerable reflection -->
+        <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            const userInput = urlParams.get('input');
+            if (userInput) {
+                document.write("You entered: " + userInput);
+            }
+        </script>
+    </div>
+</body>
+</html>
